@@ -35,6 +35,7 @@ class CabinetController
         $cabinet[$element['id_cabinet']] = [
           'cabinet_id' => $element['id_cabinet'],
           'location' => $element['location'],
+          'room' => $element['room'],
           'items' => [[
             'item_name' => $element['item_name'],
             'amount' => $element['amount'],
