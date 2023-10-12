@@ -29,14 +29,17 @@ class ItemController
   private function buildItemArray($queryResult): Array
   {
     $item = [];
-
+    $total_amount = [];
     foreach ($queryResult as $element) {
       if(!array_key_exists($element['id_item'], $item ?? [])) {
         $item[$element['id_item']] = [
           'item_name' => $element['item_name'],
+          'total_amount' => $total_amount[$element['id_item']] += $element['amount'],
           'cabinets' => [[
             'id_cabinet' => $element['id_cabinet'],
             'location' => $element['location'],
+            'room' => $element['room'],
+            'amount' => $element['amount'],
             ]],
         ];
         continue;
@@ -47,6 +50,8 @@ class ItemController
         'room' => $element['room'],
         'amount' => $element['amount'],
       ];
+
+      $item[$element['id_item']]['total_amount'] = $total_amount[$element['id_item']] += $element['amount']; 
     }
 
     return $item;
